@@ -1,7 +1,7 @@
 A repository of random stuff
 
-Configuration.h
- A marlin v1.0 configuration file with updated setting for a prusa i3 with 5mm leadscrews.
+Configuration.h  
+A marlin v1.0 configuration file with updated setting for a prusa i3 with 5mm leadscrews.
 
 bearings.scad  
 A openscad file for creating parametric bearing model using a 3d printer, needs work

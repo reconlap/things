@@ -5,7 +5,7 @@
  *  License: LGPL 2.1 or later
 */
 num_bearings = 7;
-bearing_r = 4;
+bearing_r = 4;      
 gap = .1;
 
 
@@ -52,5 +52,5 @@ for ( i = [1:num_bearings] ) {
 for ( i = [1:num_bearings] ) {
 	rotate( i*360/num_bearings, [0, 0, 1])
 	translate ([bearing_r*2.5,0,-(box_height/2)])
-	cylinder(h = ((box_height-(bearing_r*2))/2), r1 = bearing_r/3, r2 = .5, center = false);
+	cylinder(h = ((box_height-(bearing_r*2))/2)-.5, r1 = bearing_r/4, r2 = .5, center = false);
 }
