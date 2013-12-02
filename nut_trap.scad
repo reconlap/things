@@ -20,10 +20,10 @@ module nut_trap ( lenght, hole_dia, nut_dia, nut_depth, nut_sides ) {
 	// nut_sides : Number of side in the nut trap. 
 	difference() {
 		union() {
-			cylinder(lenght,hole_dia,hole_dia,center = true);
+			cylinder(lenght,hole_dia/2,hole_dia/2,center = true);
 
 			translate ([0,0,(lenght/2)-nut_depth])
-			cylinder(nut_depth,nut_dia,nut_dia,nut_depth,$fn=nut_sides);
+			cylinder(nut_depth,nut_dia/2,nut_dia/2,nut_depth,$fn=nut_sides);
 		}	
 
 	} // differance 

@@ -23,7 +23,9 @@ outer_size_y = 25;
 inner_size_x = 21;
 inner_size_y = 21;
 
-nut_size = 4;
+// Bolt
+bolt_lenght = 15;
+bolt_nut_dia = 7;
 
 difference() {
 	union() {
@@ -31,7 +33,7 @@ difference() {
 		translate([-rod_dia/2,0,0])
 		cube( size = [outer_size_x+rod_dia,outer_size_y,box_height], center = true); 
 		wedge ();
-		translate([outer_size_x/2+outer_size_x/4,0,0]) nut_vise(outer_size_x,outer_size_y,box_height, nut_size);
+		translate([inner_size_x/2+bolt_nut_dia,0,0]) nut_vise(bolt_nut_dia,bolt_lenght,box_height);
 	}
 
 		// - inner box
@@ -39,9 +41,9 @@ difference() {
 		// rod clip
 		translate ([-((outer_size_x/2+rod_dia)),0,-box_height/4])
 			rod_clip_hole(outer_size_y+2,(rod_dia/2)+1,box_height/2);
-	  // vice gap
-		translate([inner_size_x,0,0])
-			cube (size = [outer_size_x,outer_size_y/8,box_height], center = true) ;
+	  // vice grip gap
+		translate([(bolt_nut_dia*2)+(outer_size_x - inner_size_x),0,0])
+			cube (size = [(bolt_nut_dia*2)+(outer_size_x - inner_size_x)+1,outer_size_y/6,box_height], center = true) ;
 }
 
 module rod_clip_hole (w, r, h) {
@@ -80,9 +82,18 @@ translate ( v = [-(outer_size_x+rod_dia),0,0] )
 }
 
 module nut_vise(x,y,h,n){
+
+	// nut trap
+	nut_trap_size = x; // nut trap x lenght is nut_trap_size*2
+	nut_trap_depth = 3;
+	nut_trap_sides = 6;
+	bolt_dia = 3.8;
+	shaft_lenght = y+1;
+
+
 	difference() {
-		cube( size = [x/2,y,h], center = true);
+		cube( size = [nut_trap_size*2,y,h], center = true);
 		rotate([90,0,0])
-			nut_trap(lenght=y+1, hole_dia=3, nut_dia=6, nut_depth=3, nut_sides =6 );
+			nut_trap(lenght=shaft_lenght, hole_dia=bolt_dia, nut_dia=nut_trap_size, nut_depth=nut_trap_depth, nut_sides = nut_trap_sides );
 	};
 };
