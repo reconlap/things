@@ -25,14 +25,13 @@ inner_size_y = 21;
 
 nut_size = 4;
 
-translate([outer_size_x/2+outer_size_x/4,0,0]) nut_vise(outer_size_x,outer_size_y,box_height, nut_size);
-
 difference() {
 	union() {
 		// Outer Box
 		translate([-rod_dia/2,0,0])
 		cube( size = [outer_size_x+rod_dia,outer_size_y,box_height], center = true); 
 		wedge ();
+		translate([outer_size_x/2+outer_size_x/4,0,0]) nut_vise(outer_size_x,outer_size_y,box_height, nut_size);
 	}
 
 		// - inner box
@@ -40,7 +39,9 @@ difference() {
 		// rod clip
 		translate ([-((outer_size_x/2+rod_dia)),0,-box_height/4])
 			rod_clip_hole(outer_size_y+2,(rod_dia/2)+1,box_height/2);
-	
+	  // vice gap
+		translate([inner_size_x,0,0])
+			cube (size = [outer_size_x,outer_size_y/8,box_height], center = true) ;
 }
 
 module rod_clip_hole (w, r, h) {
