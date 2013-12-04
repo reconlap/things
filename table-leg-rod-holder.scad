@@ -39,8 +39,8 @@ difference() {
 		// - inner box
 		cube( size = [inner_size_x,inner_size_y,box_height+2], center = true); 
 		// rod clip
-		translate ([-((outer_size_x/2+rod_dia)),0,-box_height/4])
-			rod_clip_hole(outer_size_y+2,(rod_dia/2)+1,box_height/2);
+		translate ([-((outer_size_x/1.3+rod_dia)),0,-box_height/4])
+			rod_clip_hole(outer_size_y+2,(rod_dia/2),box_height/2);
 	  // vice grip gap
 		translate([(bolt_nut_dia*2)+(outer_size_x - inner_size_x),0,0])
 			cube (size = [(bolt_nut_dia*2)+(outer_size_x - inner_size_x)+1,outer_size_y/6,box_height], center = true) ;
@@ -48,9 +48,9 @@ difference() {
 
 module rod_clip_hole (w, r, h) {
 	rotate([90,0,0])
-		cylinder(w,r,r,center = true);
+		cylinder(w,r+0.2,r+0.2,center = true);
 	translate ( v = [0,0,-h/4] )
-		cube( size = [(r*2)-1,w,h/2], center = true); 
+		cube( size = [(r*2)-.2,w,h/2], center = true); 
  }
 
 module wedge (){
