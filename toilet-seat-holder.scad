@@ -8,7 +8,7 @@
  *  onto a bow.
 */
 
-rotate([90,90,90])
+rotate([90,0,90])
 seat_hook();
 
 module seat_hook(){
