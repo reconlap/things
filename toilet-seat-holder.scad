@@ -8,13 +8,18 @@
  *  onto a bow.
 */
 
-base();
-rotate([180,0,270])
-translate([(32.5/2)-13,-((32.5/2)-(9/2)),(9.4/2)+((26.7-9.4)/2)])
-	hook();
+rotate([90,90,90])
+seat_hook();
+
+module seat_hook(){
+	base();
+	rotate([180,0,270])
+		translate([(32.5/2)-13,-((32.5/2)-(9/2)),(9.4/2)+((26.7-9.4)/2)])
+			hook();
+}
 
 module hook(){
-	cylinder(h = 26.7-9.4, r = 9/2,center = true);
+	cube([9,9,26.7-9.4],center = true);
 	translate([0,(32.5-9.4)/2,(26.7/2)-(9) ] )
 		rotate ([90,0,0])
 			cylinder(h = 32.5, r = 9/2,center = true);
