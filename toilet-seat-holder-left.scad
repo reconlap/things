@@ -1,5 +1,5 @@
 /*
- *  OpenSCAD threaded rod holder 
+ *  OpenSCAD toilet-seat-holder-left.scad
  *  Copyright (C) 2013 Mogue Carpenter
  *
  *  License: LGPL 2.1 or later

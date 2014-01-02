@@ -1,5 +1,5 @@
 /*
- *  OpenSCAD threaded rod holder 
+ *  OpenSCAD toilet-seat-holder-right.scad
  *  Copyright (C) 2013 Mogue Carpenter
  *
  *  License: LGPL 2.1 or later
@@ -14,7 +14,7 @@ seat_hook();
 module seat_hook(){
 	base();
 	rotate([180,0,90])
-		translate([-(32.5/2)+(13-9),0,(9.4/2)+((26.7-9.4)/2)])
+		translate([(32.5/2)-(13-9),0,(9.4/2)+((26.7-9.4)/2)])
 			hook();
 }
 
