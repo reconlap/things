@@ -9,16 +9,11 @@
  *  water supply valve.
  *
 */
-
-rotate ([0,0,0])
-	stopcock ();
-
-module stopcock (){
 	inner_cyc_r = 5/2;
 	outer_cyc_r = 27/2;
 
 	shaft_h = 100;
-	shaft_r = 15/2;
+	shaft_r = 27/2;
 	shaft_taper_h = 20;
 
 	cyc_h = 20;
@@ -30,6 +25,14 @@ module stopcock (){
 	outer_hex_r = 19/2;
 
 	handel_w = 60;
+
+
+
+	translate([0,0,cyc_h+shaft_h])
+		rotate ([0,180,0])
+			stopcock ();
+
+module stopcock (){
 
 	// Socket
 	union (){
@@ -54,5 +57,9 @@ module stopcock (){
 
 	// Handle
 	translate([0,0,cyc_h+shaft_h])
-		cube([shaft_r*2,handel_w,shaft_r],center=true);
+		cube([shaft_r,handel_w,shaft_r],center=true);
+
+	translate([0,0,cyc_h+shaft_h])
+		rotate ([0,0,90])
+			cube([shaft_r,handel_w,shaft_r],center=true);
 }
