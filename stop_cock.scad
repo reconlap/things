@@ -28,38 +28,38 @@
 
 
 
-	translate([0,0,cyc_h+shaft_h])
-		rotate ([0,180,0])
+//	translate([0,0,cyc_h+shaft_h])
+//		rotate ([0,180,0])
 			stopcock ();
 
 module stopcock (){
 
 	// Socket
-	union (){
-		difference(){
-			cylinder(r = outer_cyc_r, h=cyc_h, $fn=40);
-			cylinder(r = outer_hex_r, h=cyc_h, $fn=6);
-		}
-
-		difference(){
-			cylinder(r = inner_hex_r, h=cyc_h, $fn=6);
-			cylinder(r = inner_cyc_r, h=cyc_h, $fn=18);
-		}
+	translate([0,0,shaft_h])
+		union (){
+			difference(){
+				cylinder(r = outer_cyc_r, h=cyc_h, $fn=40);
+				cylinder(r = outer_hex_r, h=cyc_h, $fn=6);
+			}
+			difference(){
+				cylinder(r = inner_hex_r, h=cyc_h, $fn=6);
+				cylinder(r = inner_cyc_r, h=cyc_h, $fn=18);
+			}
 	}
 
 	// Taper
-	translate([0,0,cyc_h])
-		cylinder(r1 = outer_cyc_r,r = shaft_r, h=shaft_taper_h, $fn=40);
+//	translate([0,0,cyc_h])
+//		cylinder(r1 = outer_cyc_r,r = shaft_r, h=shaft_taper_h, $fn=40);
 
 	// Shaft
-	translate([0,0,cyc_h+shaft_taper_h])
-		cylinder(r = shaft_r, h=shaft_h-shaft_taper_h, $fn=40);
+	translate([0,0,0])
+		cylinder(r = shaft_r, h=shaft_h+1, $fn=40);
 
 	// Handle
-	translate([0,0,cyc_h+shaft_h])
-		cube([shaft_r,handel_w,shaft_r],center=true);
+	translate([-shaft_r/2,-handel_w/2,0])
+		cube([shaft_r,handel_w,shaft_r],center=false);
 
-	translate([0,0,cyc_h+shaft_h])
+	translate([handel_w/2,-shaft_r/2,0])
 		rotate ([0,0,90])
-			cube([shaft_r,handel_w,shaft_r],center=true);
+			cube([shaft_r,handel_w,shaft_r],center=false);
 }

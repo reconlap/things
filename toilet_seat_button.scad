@@ -14,70 +14,71 @@ lenght =43;
 width = 17;
 height = 10;
 
+cap_or = width/2;
 
 plug_lenght = 39;
-plug_width = 14;
+plug_width = 13.7;
 plug_height = 5;
+wall_thinkness = 1.35;
 
+plug_or = plug_width/2;
+plug_ir = plug_or-wall_thinkness;
 
-round_cube (p=0.1,l=lenght,w=width,h=height,r=height/4,s=45);
+difference(){
+	body();
 
-module round_cube (p,l,w,h,r,s){
-	difference() {
-		cube([l,w,h],center=true);
-		round_edge_shadow (p,l,w,h,r,s);
-	}
+	translate([0,0,wall_thinkness])
+	linear_extrude(height = height, center = true, convexity = 0)
+		hull() {
+			translate([plug_lenght - plug_width,0,0]) circle(plug_ir);
+			circle(plug_ir);
+		}
 }
 
-module round_edge_shadow (p,l,w,h,r,s){
-	union() {
-		round_edge_shadow_l (p,l,w,h,r,s);
-		rotate([0,0,90])
-			round_edge_shadow_l (p,w,l,h,r,s);
-		rotate([0,90,0])
-			round_edge_shadow_l (p,h,w,l,r,s);
+translate([plug_ir,0,wall_thinkness-1])
+	cube(size=[wall_thinkness,plug_width,height-wall_thinkness],center=true);
+
+translate([plug_lenght-(plug_or*3) ,0, wall_thinkness -1])
+	cube(size=[wall_thinkness,plug_width,height-wall_thinkness],center=true);
+
+module body(){
+	difference(){
+		intersection(){
+			rotate([0,90,0])
+				translate([(-cap_or*3)+height/2,0,-plug_lenght])
+					cylinder(r=cap_or*3,h=plug_lenght*2, $fn=128);
+
+			hull(){
+				sphere(r=cap_or);
+				translate([plug_lenght - plug_width,0,0]) sphere(r=cap_or);
+			}
+		}
+
+		translate([-width/2,-width/2,0])
+			cube(size=[lenght,width,height]);
 	}
+
+	// base
+	translate([0,0, wall_thinkness])
+		linear_extrude(height = height - wall_thinkness, center = true, convexity = 0){
+					hull() {
+	  				translate([plug_lenght - plug_width,0,0]) circle(plug_or);
+					circle(plug_or);
+	 			}
+		}
 }
 
 
-module round_edge_shadow_l (p,l,w,h,r,s){
+module 2d_base(){
+	difference(){
+		hull() {
+  			translate([plug_lenght - plug_width,0,0]) circle(plug_or);
+			circle(plug_or);
+ 		}
 
-pad = p;			// Padding to maintain manifold
-box_l = l; 		// Length
-box_w = w;		// Width
-box_h = h;		// Height
-round_r = r;	// Radius of round
-smooth = s;		// Number of facets of rounding cylinder
-
-	difference() {
-		cube([box_l+pad, box_w+pad, box_h+pad], center = true);
-
-		translate([0, -box_w/2+round_r, box_h/2-round_r]) 
-		{
-			rotate(a=[0,90,0])
-				cylinder(box_l+4*pad,round_r,round_r,center=true,$fn=smooth);
+		hull() {
+			translate([plug_lenght - plug_width,0,0]) circle(plug_ir);
+			circle(plug_ir);
 		}
-
-		translate([0, -box_w/2+round_r, -(box_h/2-round_r)]) 
-		{
-			rotate(a=[0,90,0])
-				cylinder(box_l+4*pad,round_r,round_r,center=true,$fn=smooth);
-		}
-
-		translate([0, box_w/2-round_r, -(box_h/2-round_r)]) 
-		{
-			rotate(a=[0,90,0])
-				cylinder(box_l+4*pad,round_r,round_r,center=true,$fn=smooth);
-		}
-
-		translate([0, box_w/2-round_r, box_h/2-round_r]) 
-		{
-			rotate(a=[0,90,0])
-				cylinder(box_l+4*pad,round_r,round_r,center=true,$fn=smooth);
-		}
-
-		cube([box_l+pad, box_w-(round_r*2)+pad, box_h+pad+pad], center = true);
-		cube([box_l+pad, box_w+pad, box_h-(round_r*2)+pad], center = true);
-
-	} //diff
-} // round_edge_shadow
+	}
+}

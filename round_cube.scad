@@ -15,7 +15,6 @@ width = 10;
 height = 10;
 
 
-
 round_cube (p=0.1,l=lenght,w=width,h=height,r=height/4,s=45);
 
 module round_cube (p,l,w,h,r,s){
