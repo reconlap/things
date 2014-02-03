@@ -1,45 +1,38 @@
 A repository of random stuff
 
-bolt_shim.scad bolt_shim.scad  
-A simple rasier for getting a door lock and latch flush.
-
-fan_holder.scad fan_holder.stl  
-An improved fan holder for my extruder, the old one allowed the fan hood
-to hit the PEEK fan.
-
-toilet_bolt.scad, toilet_bolt.stl  
-toilet_nut.scad, toilet_nut.stl  
+toilet_bolt.scad, toilet_bolt.stl
+toilet_nut.scad, toilet_nut.stl
 A nut and bolt for attaching a toilet seat to a toilet, needs a tap and die set
 to to add threads.
 
-door_latch.scad  
+door_latch.scad
 A simple door bolt for a toiled door.
 
-gregs_wade_cooling_hood.scad  
+gregs_wade_cooling_hood.scad
 A cooling hood for a gregs wade extruder with j-head, for holding 2 fans.
  Still under development
 
-bench_spacer.scad, bench_spacer.std  
+bench_spacer.scad, bench_spacer.std
 A custom L shaped bracket for bench I'm building.
 
-L_bracket.scad, L_bracket.stl  
+L_bracket.scad, L_bracket.stl
 A simple L shaped bracket.
 
-sink_stopper.scad, sink_stopper.stl  
+sink_stopper.scad, sink_stopper.stl
 A model of a stopper for a sink.
 
-door_handle.scad, door_handle.stl  
+door_handle.scad, door_handle.stl
 A model of a simple printable internal door handle which can be screwed 
 to a door.  
 
-round_cube.scad  
+round_cube.scad
 An example of how to round the corners of a cube in openscad.
 
-stopcock.scad, stopcock.stl  
+stopcock.scad, stopcock.stl
 A printable stopcock key for turning on and off the mains water supply to
  a building.
 
-toilet_seat_*  
+toilet_seat_* 
 Various files used to repair a toilet seat.
 
 table-leg-rod-holder.scad  

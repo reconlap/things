@@ -14,13 +14,13 @@ seat_hook();
 module seat_hook(){
 	base();
 	rotate([180,0,90])
-		translate([(32.5/2)-(13-9),0,(9.4/2)+((26.7-9.4)/2)])
+		translate([(32.5/2)-(13-9),0,(9.4/2)+((36.7-9.4)/2)])
 			hook();
 }
 
 module hook(){
-	cube([9,9,26.7-9.4],center = true);
-	translate([0,(32.5-9.4)/2,(26.7/2)-(9) ] )
+	cube([9,9,36.7-9.4],center = true);
+	translate([0,(32.5-9.4)/2,(36.7/2)-(9) ] )
 		rotate ([90,0,0])
 			cylinder(h = 32.5, r = 9/2,center = true);
 
