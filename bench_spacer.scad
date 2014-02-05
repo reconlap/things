@@ -93,7 +93,7 @@ module base(){
 	hull(){
 		translate([0,0,lenght]) rotate([0,90,0])
 			cube([walls,width,outer_lip_height]);
-		translate([walls+1,0,lenght-walls]) rotate([0,180,0])
+		translate([walls,0,lenght-walls]) rotate([0,180,0])
 			cube([walls,width,outer_lip_height]);
 	}
 }
