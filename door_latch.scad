@@ -21,11 +21,12 @@ holder_lenght = 50;
 lenght = catch_lenght + holder_lenght ;
 width = 30;
 
-wall_s = 4;
-bolt_r = 3;
+wall_s = 3;
+bolt_r = 4;
 bolt_slider_w = 3;
-bolt_slider_gl = 20;
+bolt_slider_gl = catch_lenght;
 gap = 0.5;
+handle_l = 5;
 
 screw_lenght = wall_s*2+1;
 screw_size = 1.5;
@@ -36,12 +37,11 @@ p=0.1;
 r=wall_s/4;
 s=45;
 
-translate ([0,0,0]) rotate([180,0,0]) base();
-translate ([0,10,0]) rotate([180,0,0]) latch();
-translate ([width+10,0,-wall_s]) rotate([180,0,0]) top();
-translate ([-width+10,0,(holder_lenght/2)-wall_s]) rotate([0,180,0]) latch_bolt();
+translate ([0,0,holder_lenght+catch_lenght]) rotate([270,0,0]) base();
+translate ([0,-20,catch_lenght]) rotate([270,0,0]) latch();
+translate ([0,20,-catch_lenght]) rotate([90,0,0]) top();
+translate ([-15,-20,wall_s/2]) rotate([270,270,0]) latch_bolt();
 
-//translate ([-width+10,-(lenght/2)-catch_lenght/2,0]) rotate([90,-90,0]) latch_bolt();
 
 
 
@@ -49,14 +49,14 @@ module top(){
 	intersection(){
 		latch_block();
 		// top_plate_void
-		translate([0,catch_lenght,-wall_s*6]) cube([width,(holder_lenght/2)+catch_lenght/2,wall_s*6],center=false);
+		translate([0,catch_lenght,-wall_s*6.1]) 
+			cube([width,(holder_lenght*0.80),wall_s*6],center=false);
 	}
 }
 
 module latch (){
 	intersection(){
 		latch_block();
-		// latch void
 		translate([0,-5,-wall_s*3]) cube([width,catch_lenght+5,wall_s*6],center=false);
 	}
 }
@@ -65,20 +65,20 @@ module base (){
 	difference(){
 		latch_block();
 		// latch void
-		translate([0,-5,-wall_s*3]) cube([width,catch_lenght+5,wall_s*6],center=false);
+		translate([0,-handle_l,-wall_s*3]) cube([width,catch_lenght+handle_l,wall_s*6-1],center=false);
 		// top_plate_void
-		translate([0,catch_lenght,-wall_s*6]) cube([width,(holder_lenght/2)+catch_lenght/2,wall_s*6],center=false);
+		translate([0,catch_lenght,-wall_s*6]) cube([width,holder_lenght*0.80,wall_s*6],center=false);
 	}
 }
 
 module latch_bolt(){
 
-		cylinder(h=holder_lenght,r=bolt_r,center=true);
-		translate([bolt_r,0,bolt_slider_gl-catch_lenght+(bolt_slider_gl-catch_lenght)])
-			cube([bolt_r+2+gap,bolt_slider_w-gap,bolt_slider_gl-catch_lenght],center=true);
-		translate([bolt_r+2+gap,0,bolt_slider_gl-catch_lenght+(bolt_slider_gl-catch_lenght)])
-			rotate([0,180,0]) handle();
+		translate([0,0,catch_lenght])
+			cube ([wall_s*.75,bolt_r*2,holder_lenght],center=true);
+		translate([wall_s*.75,0,handle_l])
+			cube ([6,bolt_slider_w,handle_l],center=true);
 }
+
 module handle(){
 	w = (bolt_r+2)*2+gap;
 	l = (bolt_r*2)+2;
@@ -110,13 +110,12 @@ module latch_block(){
 }
 
 module top_plate(){
-
-
 	difference(){
 		cube([width,lenght,wall_s],center=false);
 
+		//Bolt hole
 		translate([width/2,lenght/2,0]) rotate([270,0,0]) 
-			cylinder(h=lenght+1,r=bolt_r,center=true);
+			cube ([bolt_r*2,wall_s*2+1,lenght+1],center=true);
 
 		//bevel
 		translate ([0,lenght/2,0])rotate ([90,0,0]) bevel(p,lenght,width,wall_s,r,s);
@@ -135,21 +134,19 @@ module back_plate(){
 
 module bolt_hole(){
 	// bolt hole
-
-
 	translate([width/2,lenght/2,0]) rotate([270,0,0]) 
 	difference(){
-		cylinder(h=lenght,r=bolt_r+2,center=true);
-		cylinder(h=lenght,r=bolt_r,center=true);
-		// handle hole
-		cube([bolt_r,bolt_slider_w ,bolt_slider_gl],center=true);
-		// bolt grove
-		translate([0,bolt_r,(holder_lenght/2)-catch_lenght])
-			cube([bolt_slider_w, bolt_r*2 ,bolt_slider_gl],center=true);
-		// clean bottom
-		translate([0,-wall_s,0])
-			cube([width, wall_s,lenght],center=true);
+
+		cube ([bolt_r*3,wall_s,lenght],center=true);
+		translate([0,-wall_s/2,0])
+			cube ([bolt_r*2,wall_s*1.5,lenght],center=true);
+
+		// bolt handle grove
+		translate([0,0,(holder_lenght/2)-(bolt_slider_gl/2)-handle_l+0.1])
+			cube([bolt_slider_w+gap, bolt_r ,bolt_slider_gl+handle_l],center=true);
+
 	}
+
 }
 
 module screw_holes(){
