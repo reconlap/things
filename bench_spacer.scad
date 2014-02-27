@@ -22,15 +22,22 @@ use </home/mec/.local/share/OpenSCAD/libraries/celtic-knots.scad>
 
 
 
-lenght = 90;
-width = 110;
+lenght = 85;
+width = 120;
 height = 35;
 
 walls = 5;
 
+//bench 1
+//lip_width = 23;
+//inner_lip_height = 16.3;
+//outer_lip_height = 18;
+
+
+//bench 2
 lip_width = 23;
-inner_lip_height = 16.3;
-outer_lip_height = 18;
+inner_lip_height = 8;
+outer_lip_height = 7.8;
 
 screw_walls = 10;
 screw_hole_size = 2;
@@ -40,16 +47,45 @@ base_h = height/2;
 
 inset = 5;
 
+//part_l();
+part_m();
+//part_r();
 
-rotate ([0,0,0])
+//rotate ([0,270,0]) fullpart();
+
+module part_r(){
+	translate([lenght/2,-(width*0.66)-(walls),0])
+		intersection(){
+			rotate ([0,270,0]) fullpart();
+			translate([-lenght-2,(width*0.66)-(walls),-1]) cube([lenght+walls,(width/3)+(walls)+1,height+2]);
+		}
+}
+
+module part_l(){
+	translate([lenght/2,-(width*0.66)-(walls),0])
+		intersection(){
+			rotate ([0,270,0]) fullpart();
+			translate([-lenght-2,0,-1]) cube([lenght+walls,(width/3)+(walls),height+2]);
+		}
+}
+
+module part_m(){
+	translate([lenght/2,-(width*0.66)-(walls),0])
+		difference(){
+			rotate ([0,270,0]) fullpart();
+			translate([-lenght-2,0,-1]) cube([lenght+walls,(width/3)+(walls)-1,height+2]);
+			translate([-lenght-2,(width*0.66)-(walls),-1]) cube([lenght+walls,(width/3)+(walls)+1,height+2]);
+		}
+}
+
+module fullpart() {
 	difference(){
 		base();
 		screws();
 		rotate([0,-270,0]) holes_s();
-		rotate([0,0,0]) decoration(lenght=lenght,width=width);
+		rotate([0,0,0]) decoration(lenght=lenght,width=width-2);
 	}
-
-
+}
 
 module screws(){
 
@@ -73,7 +109,23 @@ module screws(){
 			screw_hole(outer_lip_height+1,3,screw_hole_size);
 			cylinder(h=outer_lip_height-screw_walls, r=5 );
 		}
+	translate([screw_walls,width*0.5,lenght*0.9]) rotate ([0,90,0]){
+			screw_hole(outer_lip_height+1,3,screw_hole_size);
+			cylinder(h=outer_lip_height-screw_walls, r=5 );
+		}
+	translate([screw_walls,width*0.9,lenght*0.5]) rotate ([0,90,0]){
+			screw_hole(outer_lip_height+1,3,screw_hole_size);
+			cylinder(h=outer_lip_height-screw_walls, r=5 );
+		}
 
+	translate([screw_walls,width*0.9,lenght*0.5]) rotate ([0,90,0]){
+			screw_hole(outer_lip_height+1,3,screw_hole_size);
+			cylinder(h=outer_lip_height-screw_walls, r=5 );
+		}
+	translate([screw_walls,width*0.08,lenght*0.5]) rotate ([0,90,0]){
+			screw_hole(outer_lip_height+1,3,screw_hole_size);
+			cylinder(h=outer_lip_height-screw_walls, r=5 );
+		}
 }
 
 module base(){
@@ -113,20 +165,23 @@ module screw_hole(sl,scs,sr){
 
 
 module holes_s(){
-	translate([(-lip_width/2)-walls,width*0.33,-5]){
+	translate([(-lip_width/2)-walls,width*0.20,-5]){
 		cylinder(h=20,r=5, center=false);
 	}
-	translate([(-lip_width/2)-walls,width*0.66,-5]){
+	translate([(-lip_width/2)-walls,width*0.75,-5]){
 		cylinder(h=20,r=5, center=false);
 	}
 	translate([-(lenght*0.70)-walls,width*0.5,-5]){
 		cylinder(h=20,r=8, center=false);
 	}
-	translate([-(lip_width+(walls*2)+10),width*0.75,-5]){
-		cylinder(h=20,r=5, center=false);
+	translate([-(lip_width+(walls*2)+15),width*0.75,-5]){
+		cylinder(h=20,r=8, center=false);
 	}
-	translate([-(lip_width+(walls*2)+10),width*0.25,-5]){
-		cylinder(h=20,r=5, center=false);
+	translate([-(lip_width+(walls*2)+15),width*0.20,-5]){
+		cylinder(h=20,r=8, center=false);
+	}
+	translate([-(lenght*0.15)-walls,width*0.5,-5]){
+		cylinder(h=20,r=8, center=false);
 	}
 }
 
@@ -147,8 +202,8 @@ $fn = 100;
 			cylinder(h=walls, r1=height+walls , r2=height , $fn=360);
 		translate([height+walls,0,0])  
 			scale([1,0.25]) cylinder(h=walls, r1=height+walls , r2=height , $fn=360);
-		translate([height+walls,width/2,0]) scale([0.05,1])
-			cylinder(h=walls, r1=width+walls , r2=width , $fn=360);	
+		translate([height+walls,width/2,0]) scale([0.07,1])
+			cylinder(h=walls, r1=(width+walls*2) , r2=width , $fn=360);	
 
 
 }

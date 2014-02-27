@@ -1,5 +1,8 @@
 A repository of random stuff
 
+microswitch_holder.scad microswitch.stl
+A microswitch holder for the z-endstop to be used with http://www.thingiverse.com/thing:239996
+
 bolt_shim.scad bolt_shim.scad  
 A simple rasier for getting a door lock and latch flush.
 

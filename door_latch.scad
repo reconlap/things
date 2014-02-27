@@ -37,9 +37,9 @@ p=0.1;
 r=wall_s/4;
 s=45;
 
-translate ([0,0,holder_lenght+catch_lenght]) rotate([270,0,0]) base();
+//translate ([0,0,holder_lenght+catch_lenght]) rotate([270,0,0]) base();
 translate ([0,-20,catch_lenght]) rotate([270,0,0]) latch();
-translate ([0,20,-catch_lenght]) rotate([90,0,0]) top();
+//translate ([0,20,-catch_lenght]) rotate([90,0,0]) top();
 translate ([-15,-20,wall_s/2]) rotate([270,270,0]) latch_bolt();
 
 
@@ -154,8 +154,8 @@ module screw_holes(){
 		translate([width*0.80,holder_lenght*0.25,wall_s*2]) 	screw_hole();
 		translate([width*0.20,holder_lenght*0.75,wall_s*2]) 	screw_hole();
 		translate([width*0.80,holder_lenght*0.75,wall_s*2]) 	screw_hole();
-		translate([width*0.20,lenght-(catch_lenght*0.75),wall_s*2]) 	screw_hole();
-		translate([width*0.80,lenght-(catch_lenght*0.75),wall_s*2]) 	screw_hole();
+		translate([width*0.20,lenght-(catch_lenght*0.50),wall_s*2]) 	screw_hole();
+		translate([width*0.80,lenght-(catch_lenght*0.50),wall_s*2]) 	screw_hole();
 }
 
 module screw_hole(){
