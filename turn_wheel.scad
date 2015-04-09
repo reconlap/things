@@ -46,7 +46,7 @@ module wheel(){
     }
 
     // inner wheel
-    translate([0,0,5])
+    translate([0,0,ring_h/2])
         difference(){
             cylinder(r=ring_inner_id+ring_inner_w,h=ring_inner_h,center=true);
             cylinder(r=ring_inner_id,h=ring_inner_h+1,center=true);
